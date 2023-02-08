@@ -1,0 +1,12 @@
+venv/
+infra/.env
+swa-bot-376507-3a3468d8093c.json
+SWA_bot/client_secret.json
+*.Identifier
+SWA_bot/functions.py
+SWA_bot/functions_for_xlsx.py
+/.mypy_cache/
+/SWA_bot/sheets.googleapis.com-python.json
+/SWA_bot/DB.xlsx
+/*.xlsx
+/SWA_bot/SWAbot.log
