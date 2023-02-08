@@ -74,3 +74,6 @@ jobs:
             sudo touch sheets.googleapis.com-python.json
             echo SHEETS_GOOGLE_APIS=${{ secrets.SHEETS_GOOGLE_APIS
             }} >> client_secret.json
+            sudo docker cp .env der_narr-swa-bot-1:app/
+            sudo docker cp client_secret.json der_narr-swa-bot-1:app/
+            sudo docker cp sheets.googleapis.com-python.json der_narr-swa-bot-1:app/
