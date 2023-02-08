@@ -9,8 +9,8 @@ from constants import (AMOUNT_COL, HELP_MESSAGE, INSTR_COL, MAT_NO_COL,
                        MAX_SYMBOLS, NAME_COL, PLACE_COL, REMARK_COL,
                        START_MESSAGE, TITLES, WORKSHEET_LABEL)
 from dotenv import load_dotenv
-from exceptions import (AccessError, NothingFound, PasswordError, PasswordOk,
-                        ToLongResult)
+from exceptions import (AccessError, NothingFoundError, PasswordError,
+                        PasswordOkError, ToLongResultError)
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 load_dotenv()
@@ -92,7 +92,7 @@ def check_password(update, context):
         )
         logged_users.append(update.effective_chat.id)
 
-        raise PasswordOk('Введен верный пароль')
+        raise PasswordOkError('Введен верный пароль')
 
     return True
 
@@ -294,7 +294,7 @@ def search_spare_parts(update, context):
             context,
             text='По вашему запросу ничего не найдено'
         )
-        raise NothingFound('По запросу ничего не найдено')
+        raise NothingFoundError('По запросу ничего не найдено')
 
     for row_index in rows_list:
         results.append(
@@ -330,7 +330,7 @@ def search_spare_parts(update, context):
             text='Найдено слишком много данных, попробуйте уточнить поисковый '
                  'запрос.'
         )
-        raise ToLongResult('Найдено слишком много данных')
+        raise ToLongResultError('Найдено слишком много данных')
 
     send_message_and_log(
         update=update,
