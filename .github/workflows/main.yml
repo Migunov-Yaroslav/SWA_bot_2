@@ -64,16 +64,18 @@ jobs:
             sudo docker pull d3rn4rr/swa_bot_2:latest
             sudo docker compose stop
             sudo docker compose rm swa-bot
-            sudo touch .env
+            :> .env
             echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
             echo BOT_PASSWORD=${{ secrets.BOT_PASSWORD }} >> .env
             echo SPREADSHEET_NAME=${{ secrets.SPREADSHEET_NAME }} >> .env
-            sudo touch client_secret.json
-            echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> client_secret.json
+            
+            :> client_secret.json
+            echo ${{ secrets.CLIENT_SECRET }} >> client_secret.json
+            
+            :> sheets.googleapis.com-python.json
+            echo ${{ secrets.SHEETS_GOOGLE_APIS}} >> sheets.googleapis.com-python.json
+            
             sudo docker compose up -d
-            sudo touch sheets.googleapis.com-python.json
-            echo SHEETS_GOOGLE_APIS=${{ secrets.SHEETS_GOOGLE_APIS
-            }} >> client_secret.json
             sudo docker cp .env der_narr-swa-bot-1:app/
             sudo docker cp client_secret.json der_narr-swa-bot-1:app/
             sudo docker cp sheets.googleapis.com-python.json der_narr-swa-bot-1:app/
