@@ -16,17 +16,7 @@ class PasswordOk(Exception):
     """
 
 
-class HttpStatusNotOk(Exception):
-    """Класс исключения.
-
-     Вызывается в случае, если статус кода ответа сервера отличается от
-     HTTPStatus.Ok.
-     """
-
-    pass
-
-
-class NothingFound(Exception):
+class NothingFoundError(Exception):
     """
     Класс исключения.
 
@@ -36,7 +26,7 @@ class NothingFound(Exception):
     pass
 
 
-class ToLongResult(Exception):
+class ToLongResultError(Exception):
     """
     Класс исключения.
 
