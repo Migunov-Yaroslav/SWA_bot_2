@@ -70,7 +70,7 @@ jobs:
             echo SPREADSHEET_NAME=${{ secrets.SPREADSHEET_NAME }} >> .env
             sudo touch client_secret.json
             echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> client_secret.json
-            sudo docker-compose up -d
+            sudo docker compose up -d
             sudo touch sheets.googleapis.com-python.json
             echo SHEETS_GOOGLE_APIS=${{ secrets.SHEETS_GOOGLE_APIS
             }} >> client_secret.json
