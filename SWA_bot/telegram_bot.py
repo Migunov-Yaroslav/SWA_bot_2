@@ -83,7 +83,7 @@ def check_password(update, context):
 
         raise PasswordError('Введен неверный пароль')
 
-    elif update.message.text == BOT_PASSWORD:
+    if update.message.text == BOT_PASSWORD:
         send_message_and_log(
             update=update,
             context=context,
