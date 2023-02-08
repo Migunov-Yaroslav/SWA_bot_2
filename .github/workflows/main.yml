@@ -47,7 +47,7 @@ jobs:
           context: ./SWA_bot/
           file: ./SWA_bot/Dockerfile
           push: true
-          tags: d3rn4rr/SWA_bot_2:latest
+          tags: d3rn4rr/swa_bot_2:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -61,7 +61,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker pull d3rn4rr/SWA_bot_2:latest
+            sudo docker pull d3rn4rr/swa_bot_2:latest
             sudo docker compose stop
             sudo docker compose rm swa-bot
             :> .env
