@@ -8,7 +8,7 @@ class PasswordError(Exception):
     pass
 
 
-class PasswordOk(Exception):
+class PasswordOkError(Exception):
     """
     Класс исключения.
 
