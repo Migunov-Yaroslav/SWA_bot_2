@@ -69,8 +69,8 @@ jobs:
             echo BOT_PASSWORD=${{ secrets.BOT_PASSWORD }} >> .env
             echo SPREADSHEET_NAME=${{ secrets.SPREADSHEET_NAME }} >> .env
             :> client_secret.json
-            echo CLIENT_SECRET=${{ secret.CLIENT_SECRET }} >> client_secret.json
+            echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> client_secret.json
             sudo docker-compose up -d
             :> sheets.googleapis.com-python.json
-            echo SHEETS_GOOGLE_APIS=${{ secret.SHEETS_GOOGLE_APIS
+            echo SHEETS_GOOGLE_APIS=${{ secrets.SHEETS_GOOGLE_APIS
             }} >> client_secret.json
