@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   swa-bot:
-    build: ../SWA_bot
+    image: d3rn4rr/SWA_bot_2:latest
     restart: always
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
     env_file:
-      - .env
+      - ./.env
 
 volumes:
   static_value:
