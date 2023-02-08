@@ -64,13 +64,13 @@ jobs:
             sudo docker pull d3rn4rr/swa_bot_2:latest
             sudo docker compose stop
             sudo docker compose rm swa-bot
-            :> .env
+            sudo touch .env
             echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
             echo BOT_PASSWORD=${{ secrets.BOT_PASSWORD }} >> .env
             echo SPREADSHEET_NAME=${{ secrets.SPREADSHEET_NAME }} >> .env
-            :> client_secret.json
+            sudo touch client_secret.json
             echo CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> client_secret.json
             sudo docker-compose up -d
-            :> sheets.googleapis.com-python.json
+            sudo touch sheets.googleapis.com-python.json
             echo SHEETS_GOOGLE_APIS=${{ secrets.SHEETS_GOOGLE_APIS
             }} >> client_secret.json
