@@ -21,7 +21,6 @@ AMOUNT_COL = 3
 INSTR_COL = 4
 REMARK_COL = 5
 PLACE_COL = 6
-WORKSHEET_LABEL = 'Лист1'
 TITLES = (
     'Номер п/п',
     'Название',

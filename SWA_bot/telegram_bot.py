@@ -7,7 +7,7 @@ import pygsheets
 import telegram
 from constants import (AMOUNT_COL, HELP_MESSAGE, INSTR_COL, MAT_NO_COL,
                        MAX_SYMBOLS, NAME_COL, PLACE_COL, REMARK_COL,
-                       START_MESSAGE, TITLES, WORKSHEET_LABEL)
+                       START_MESSAGE, TITLES)
 from dotenv import load_dotenv
 from exceptions import (AccessError, NothingFoundError, PasswordError,
                         PasswordOkError, ToLongResultError)
@@ -253,14 +253,13 @@ def search_spare_parts(update, context):
         w_sheet = spreadsheet.sheet1
     except Exception as error:
         logger.error(
-            'Ошибка открытия рабочего листа {WORKSHEET_LABEL}:'
-            f' {error}'
+            f'Ошибка открытия рабочего листа {error}'
         )
         send_message_and_log(
             update,
             context,
-            text='Не удается открыть рабочий лист "{WORKSHEET_LABEL}" с '
-                 f'базой данных запчастей. Ошибка: {error}'
+            text='Не удается открыть рабочий лист с базой данных запчастей. '
+                 f'Ошибка: {error}'
         )
         raise AccessError(
             f'Ошибка открытия рабочего листа: {error}'
