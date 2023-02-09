@@ -69,13 +69,9 @@ jobs:
             echo BOT_PASSWORD=${{ secrets.BOT_PASSWORD }} >> .env
             echo SPREADSHEET_NAME=${{ secrets.SPREADSHEET_NAME }} >> .env
             
-            :> client_secret.json
-            echo ${{ secrets.CLIENT_SECRET }} >> client_secret.json
-            
-            :> sheets.googleapis.com-python.json
-            echo ${{ secrets.SHEETS_GOOGLE_APIS}} >> sheets.googleapis.com-python.json
+            :> swa-bot-376507-3a3468d8093c.json
+            echo ${{ secrets.SWA_BOT_SERVICE }} >> swa-bot-376507-3a3468d8093c.json
             
             sudo docker compose up -d
             sudo docker cp .env der_narr-swa-bot-1:app/
-            sudo docker cp client_secret.json der_narr-swa-bot-1:app/
-            sudo docker cp sheets.googleapis.com-python.json der_narr-swa-bot-1:app/
+            sudo docker cp swa-bot-376507-3a3468d8093c.json der_narr-swa-bot-1:app/
