@@ -233,6 +233,8 @@ def search_spare_parts(update, context):
         )
         raise AccessError(f'Ошибка авторизации в Google API: {error}')
 
+    print(client.spreadsheet_titles())
+
     # Открытие таблицы
     try:
         spreadsheet = client.open(title=SPREADSHEET_NAME)
@@ -248,20 +250,20 @@ def search_spare_parts(update, context):
 
     # Открытие рабочего листа
     try:
-        w_sheet = spreadsheet.worksheet_by_title(WORKSHEET_LABEL)
+        w_sheet = spreadsheet.sheet1
     except Exception as error:
         logger.error(
-            f'Ошибка открытия рабочего листа {WORKSHEET_LABEL}:'
+            'Ошибка открытия рабочего листа {WORKSHEET_LABEL}:'
             f' {error}'
         )
         send_message_and_log(
             update,
             context,
-            text=f'Не удается открыть рабочий лист "{WORKSHEET_LABEL}" с '
+            text='Не удается открыть рабочий лист "{WORKSHEET_LABEL}" с '
                  f'базой данных запчастей. Ошибка: {error}'
         )
         raise AccessError(
-            f'Ошибка открытия рабочего листа {WORKSHEET_LABEL}: {error}'
+            f'Ошибка открытия рабочего листа: {error}'
         )
 
     # Выгрузка данных с рабочего листа в виде списка списков строк
