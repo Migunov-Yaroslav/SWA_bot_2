@@ -233,8 +233,6 @@ def search_spare_parts(update, context):
         )
         raise AccessError(f'Ошибка авторизации в Google API: {error}')
 
-    print(client.spreadsheet_titles())
-
     # Открытие таблицы
     try:
         spreadsheet = client.open(title=SPREADSHEET_NAME)
