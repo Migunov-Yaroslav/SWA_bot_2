@@ -21,11 +21,11 @@ AMOUNT_COL = 3
 INSTR_COL = 4
 REMARK_COL = 5
 PLACE_COL = 6
-WORKSHEET_LABEL = 'Лист1'
+WORKSHEET_LABEL = 'Sheet1'
 TITLES = (
     'Номер п/п',
     'Название',
-    'man.ID/mat.no',
+    'Mat_No/Man_ID',
     'Количество',
     'Инструмент',
     'Дополнительно',

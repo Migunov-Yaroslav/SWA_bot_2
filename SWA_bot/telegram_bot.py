@@ -221,7 +221,7 @@ def search_spare_parts(update, context):
     # Авторизация в Google API
     try:
         client = pygsheets.authorize(
-            service_file='swa-bot-376507-3a3468d8093c.json',
+            service_file='swa-bot.json',
         )
     except Exception as error:
         logger.error(f'Ошибка авторизации в Google API: {error}')

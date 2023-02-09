@@ -69,9 +69,9 @@ jobs:
             echo BOT_PASSWORD=${{ secrets.BOT_PASSWORD }} >> .env
             echo SPREADSHEET_NAME=${{ secrets.SPREADSHEET_NAME }} >> .env
             
-            :> swa-bot-376507-3a3468d8093c.json
-            echo ${{ secrets.SWA_BOT_SERVICE }} >> swa-bot-376507-3a3468d8093c.json
+            :> swa-bot.json
+            echo ${{ secrets.SWA_BOT_SERVICE }} >> swa-bot.json
             
             sudo docker compose up -d
             sudo docker cp .env der_narr-swa-bot-1:app/
-            sudo docker cp swa-bot-376507-3a3468d8093c.json der_narr-swa-bot-1:app/
+            sudo docker cp swa-bot.json der_narr-swa-bot-1:app/
