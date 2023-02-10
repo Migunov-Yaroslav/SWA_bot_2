@@ -15,13 +15,9 @@ from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 load_dotenv()
 
-# BOT_TOKEN = os.getenv('TELEGRAM_TOKEN')
-# BOT_PASSWORD = os.getenv('BOT_PASSWORD')
-# SPREADSHEET_NAME = os.getenv('SPREADSHEET_NAME')
-
-BOT_TOKEN = '5645050408:AAGNVONvXRlIsdkaRI8_Rc7Jv15uogx-Fxg'
-BOT_PASSWORD = '123'
-SPREADSHEET_NAME = 'БУ запчасти (от 12.01.23)_бот'
+BOT_TOKEN = os.getenv('TELEGRAM_TOKEN')
+BOT_PASSWORD = os.getenv('BOT_PASSWORD')
+SPREADSHEET_NAME = os.getenv('SPREADSHEET_NAME')
 
 logged_users: list = []
 
