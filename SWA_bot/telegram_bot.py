@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 
 import pygsheets
 import telegram
-from constants import (AMOUNT_COL, HELP_MESSAGE, INSTRUMENTS, INSTR_COL,
+from constants import (AMOUNT_COL, HELP_MESSAGE, INSTR_COL, INSTRUMENTS,
                        MAT_NO_COL, MAX_SYMBOLS, NAME_COL, PLACE_COL,
                        REMARK_COL, START_MESSAGE, TITLES)
 from dotenv import load_dotenv
