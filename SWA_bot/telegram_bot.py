@@ -5,9 +5,9 @@ from logging.handlers import RotatingFileHandler
 
 import pygsheets
 import telegram
-from constants import (AMOUNT_COL, HELP_MESSAGE, INSTR_COL, MAT_NO_COL,
-                       MAX_SYMBOLS, NAME_COL, PLACE_COL, REMARK_COL,
-                       START_MESSAGE, TITLES)
+from constants import (AMOUNT_COL, HELP_MESSAGE, INSTR_COL, INSTRUMENTS,
+                       MAT_NO_COL, MAX_SYMBOLS, NAME_COL, PLACE_COL,
+                       REMARK_COL, START_MESSAGE, TITLES)
 from dotenv import load_dotenv
 from exceptions import (AccessError, NothingFoundError, PasswordError,
                         PasswordOkError, ToLongResultError)
@@ -97,9 +97,41 @@ def check_password(update, context):
     return True
 
 
-def find_spare_part_rows(sheet, lookup_str):
+def define_instrument(lookup_str):
     """
-    Найти номера строк таблицы, в которых находится информация об искомых з/ч.
+    Определить в поисковом запрос инструмент и запрос.
+
+    Разделить строку, содержащую поисковый запрос на список по разделителю
+    "пробел". Перебрать список, если элемент списка соответствует шаблону
+    (обозначение инструмента), добавить его в итоговый список и удалить из
+    исходного. Исходный список превратить в строку и добавить в итоговый.
+    Вернуть итоговый список.
+
+    :param lookup_str: str - исходный поисковый запрос;
+    :return: List(str) - список, содержащий обозначение инструмента и
+    строку-поисковый запрос.
+
+    """
+    strings_list = lookup_str.split(' ')
+    instr_w_search_query = []
+    instr = ''
+
+    for string in strings_list:
+        if string in INSTRUMENTS:
+            instr = string
+            strings_list.remove(string)
+
+    instr_w_search_query.append(instr)
+    lookup_str = ' '.join([elem.lower() for elem in strings_list])
+    instr_w_search_query.append(lookup_str)
+
+    return instr_w_search_query
+
+
+def find_spare_part_rows(sheet, search_query):
+    """
+    Найти номера строк таблицы, в которых находится информация об искомых
+    з/ч, если в запросе не указан инструмент.
 
     Перебрать все строки каждого из вложенных списков, проверить вхождение в
     них строки шаблона при помощи встроенной функции строк find() и вернуть
@@ -109,17 +141,19 @@ def find_spare_part_rows(sheet, lookup_str):
     виде списка из вложенных списков; номер n вложенного списка - это
     номер n+1 соответствующей строки в рабочем листе; номер n вложенного
     списка - это номер n+1 столбца в рабочем листе;
-    :param lookup_str: str - искомая строка;
+    :param search_query: List[str] - поисковый запрос;
     :return: List(int) - список номеров списков в исходном списке sheet_list,
     которые содержат искомую строку.
     """
     lookup_rows = []
+
     for row_index in range(0, len(sheet)):
         for col_index in range(0, len(sheet[0])):
             if (
-                    sheet[row_index][col_index].lower().find(
-                        lookup_str.lower()
-                    ) != -1 and (row_index not in lookup_rows)
+                search_query[1].lower() in
+                sheet[row_index][col_index].lower()
+                and search_query[0] in sheet[row_index][4]
+                and row_index not in lookup_rows
             ):
                 lookup_rows.append(row_index)
 
@@ -285,9 +319,12 @@ def search_spare_parts(update, context):
             f'get_values: {error}'
         )
 
-    lookup_str = update.message.text
     results = []
-    rows_list = find_spare_part_rows(sheet=sheet_list, lookup_str=lookup_str)
+    search_query = define_instrument(update.message.text)
+    rows_list = find_spare_part_rows(
+        sheet=sheet_list,
+        search_query=search_query,
+    )
 
     if not rows_list:
         send_message_and_log(
